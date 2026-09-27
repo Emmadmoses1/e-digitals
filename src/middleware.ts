@@ -2,15 +2,18 @@ import { auth } from '@/lib/auth'
 import { NextResponse } from 'next/server'
 
 export default auth((req) => {
-  const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
-  const isLoginPage = req.nextUrl.pathname === '/admin/login'
-  const isAuthenticated = !!req.auth
+  const { pathname } = req.nextUrl
 
-  if (isAdminRoute && !isLoginPage && !isAuthenticated) {
-    return NextResponse.redirect(new URL('/admin/login', req.url))
+  // Only protect /admin routes except /admin/login
+  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+    if (!req.auth) {
+      const loginUrl = new URL('/admin/login', req.url)
+      return NextResponse.redirect(loginUrl)
+    }
   }
 
-  if (isLoginPage && isAuthenticated) {
+  // If logged in and trying to access login page, redirect to admin
+  if (pathname === '/admin/login' && req.auth) {
     return NextResponse.redirect(new URL('/admin', req.url))
   }
 
