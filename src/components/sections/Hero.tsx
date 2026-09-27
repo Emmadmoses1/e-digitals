@@ -1,29 +1,28 @@
 import Link from 'next/link'
-import { ArrowRight, Star } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function Hero() {
   return (
     <section className="min-h-screen bg-white flex items-center pt-16">
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 w-full py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
           {/* Left */}
           <div>
-            <div className="inline-flex items-center gap-2 bg-[#f97316]/10 text-[#f97316] text-xs font-semibold px-4 py-2 rounded-full mb-8">
-              <span className="w-1.5 h-1.5 bg-[#f97316] rounded-full animate-pulse" />
-              Available for new projects
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0a0a0a] leading-tight tracking-tight mb-6">
-              We Build Brands &{' '}
-              <span className="text-[#f97316]">Digital</span>{' '}
-              Experiences
+            <p className="text-xs font-bold text-[#f97316] tracking-widest uppercase mb-6">
+              Hello, welcome to
+            </p>
+            <h1 className="text-5xl md:text-7xl font-black text-[#0a0a0a] leading-none tracking-tight mb-2">
+              E-DIGITALS
             </h1>
-
-            <p className="text-lg text-[#6b7280] leading-relaxed mb-8 max-w-lg">
-              E-DIGITALS is a creative studio specialising in brand identity design and web development for ambitious businesses.
+            <h2 className="text-5xl md:text-7xl font-black text-[#f97316] leading-none tracking-tight mb-8">
+              STUDIO
+            </h2>
+            <p className="text-base text-[#6b7280] leading-relaxed mb-10 max-w-md">
+              We are a creative studio specialising in brand identity design and web development for ambitious businesses ready to stand out.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 mb-14">
               <Link href="/work" className="btn-primary">
                 View Our Work <ArrowRight size={16} />
               </Link>
@@ -32,52 +31,41 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Social proof */}
-            <div className="flex items-center gap-6 pt-8 border-t border-[#f3f4f6]">
-              <div className="flex -space-x-2">
-                {['#f97316', '#0a0a0a', '#6b7280', '#374151'].map((c, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: c }}>
-                    {String.fromCharCode(65 + i)}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="flex items-center gap-1 mb-0.5">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={12} fill="#f97316" className="text-[#f97316]" />)}
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-[#f3f4f6]">
+              {[
+                { number: '120+', label: 'Projects Done' },
+                { number: '50+', label: 'Happy Clients' },
+                { number: '5+', label: 'Years Experience' },
+              ].map((s) => (
+                <div key={s.label}>
+                  <p className="text-3xl font-black text-[#0a0a0a]">{s.number}</p>
+                  <p className="text-xs text-[#9ca3af] font-medium mt-1 tracking-wide">{s.label}</p>
                 </div>
-                <p className="text-xs text-[#6b7280]"><span className="font-semibold text-[#0a0a0a]">50+</span> happy clients</p>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Right — visual */}
-          <div className="relative hidden lg:block">
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
-              {/* Main card */}
-              <div className="absolute inset-8 bg-[#0a0a0a] rounded-3xl flex items-center justify-center shadow-2xl">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-[#f97316] rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-white font-black text-3xl">E</span>
-                  </div>
-                  <p className="text-white font-bold text-xl tracking-tight">E-DIGITALS</p>
-                  <p className="text-[#6b7280] text-sm mt-1">Creative Studio</p>
+          {/* Right — decorative visual */}
+          <div className="hidden lg:flex items-center justify-center">
+            <div className="relative w-[420px] h-[480px]">
+              {/* Main block */}
+              <div className="absolute inset-0 bg-[#0a0a0a] rounded-none flex flex-col items-center justify-center">
+                <div className="w-24 h-24 bg-[#f97316] flex items-center justify-center mb-6">
+                  <span className="text-white font-black text-5xl">E</span>
                 </div>
+                <p className="text-white font-black text-2xl tracking-tight">E-DIGITALS</p>
+                <p className="text-[#6b7280] text-sm mt-2 tracking-widest uppercase">Creative Studio</p>
               </div>
 
-              {/* Floating cards */}
-              <div className="absolute top-4 right-0 bg-white rounded-2xl shadow-xl p-4 border border-[#f3f4f6]">
-                <p className="text-xs text-[#6b7280] mb-1">Projects Done</p>
-                <p className="text-2xl font-bold text-[#0a0a0a]">120+</p>
-              </div>
+              {/* Accent corner */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#f97316]" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 border-4 border-[#f97316]" />
 
-              <div className="absolute bottom-4 left-0 bg-[#f97316] rounded-2xl shadow-xl p-4">
-                <p className="text-xs text-white/80 mb-1">Client Rating</p>
-                <p className="text-2xl font-bold text-white">5.0 ★</p>
-              </div>
-
-              <div className="absolute bottom-20 right-2 bg-white rounded-2xl shadow-xl p-3 border border-[#f3f4f6]">
-                <p className="text-xs text-[#6b7280]">Years Experience</p>
-                <p className="text-xl font-bold text-[#0a0a0a]">5+</p>
+              {/* Floating stat */}
+              <div className="absolute -right-12 top-1/3 bg-white shadow-xl border border-[#f3f4f6] p-4 w-36">
+                <p className="text-xs text-[#9ca3af] font-medium uppercase tracking-wide mb-1">Client Rating</p>
+                <p className="text-2xl font-black text-[#0a0a0a]">5.0 <span className="text-[#f97316]">★</span></p>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import Hero from '@/components/sections/Hero'
 import SelectedWork from '@/components/sections/SelectedWork'
 import ServicesPreview from '@/components/sections/ServicesPreview'
+import Stats from '@/components/sections/Stats'
 import CTA from '@/components/sections/CTA'
 
 export default async function HomePage() {
@@ -20,8 +21,9 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <SelectedWork projects={projects as any} />
       <ServicesPreview services={services as any} />
+      <Stats />
+      <SelectedWork projects={projects as any} />
       <CTA />
     </>
   )

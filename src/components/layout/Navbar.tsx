@@ -6,10 +6,11 @@ import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
 const links = [
-  { href: '/work', label: 'Work' },
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
-  { href: '/process', label: 'Process' },
+  { href: '/work', label: 'Work' },
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact Us' },
 ]
 
 export default function Navbar() {
@@ -26,58 +27,46 @@ export default function Navbar() {
   useEffect(() => { setOpen(false) }, [pathname])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#f3f4f6]' : 'bg-white'}`}>
       <nav className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="w-8 h-8 bg-[#f97316] rounded-lg flex items-center justify-center">
-            <span className="text-white font-black text-sm">E</span>
-          </span>
-          <span className="font-bold text-[#0a0a0a] tracking-tight">E-DIGITALS</span>
+        <Link href="/" className="font-black text-[#0a0a0a] text-xl tracking-tight">
+          E-<span className="text-[#f97316]">DIGITALS</span>
         </Link>
 
-        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`text-sm font-medium transition-colors duration-200 ${pathname === l.href ? 'text-[#f97316]' : 'text-[#374151] hover:text-[#0a0a0a]'}`}
+            <Link key={l.href} href={l.href}
+              className={`text-sm font-medium transition-colors duration-200 relative ${pathname === l.href ? 'text-[#f97316]' : 'text-[#374151] hover:text-[#0a0a0a]'}`}
             >
               {l.label}
+              {pathname === l.href && (
+                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#f97316]" />
+              )}
             </Link>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <Link href="/contact" className="btn-primary text-sm py-2 px-5">
+        <div className="hidden md:flex items-center">
+          <Link href="/contact" className="btn-primary py-2 px-5 text-xs">
             Let&apos;s Talk
           </Link>
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden p-2 rounded-lg text-[#374151] hover:text-[#0a0a0a] hover:bg-[#f3f4f6] transition-colors"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
+        <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-[#0a0a0a]">
+          {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
         <div className="md:hidden bg-white border-t border-[#f3f4f6] px-6 py-6 flex flex-col gap-4 shadow-lg">
           {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`text-base font-medium py-2 transition-colors ${pathname === l.href ? 'text-[#f97316]' : 'text-[#374151]'}`}
+            <Link key={l.href} href={l.href}
+              className={`text-base font-semibold py-2 border-b border-[#f3f4f6] ${pathname === l.href ? 'text-[#f97316]' : 'text-[#0a0a0a]'}`}
             >
               {l.label}
             </Link>
           ))}
-          <Link href="/contact" className="btn-primary text-sm mt-2 justify-center">
+          <Link href="/contact" className="btn-primary mt-2 justify-center">
             Let&apos;s Talk
           </Link>
         </div>
