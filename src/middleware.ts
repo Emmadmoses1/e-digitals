@@ -1,24 +1,32 @@
-import { auth } from '@/lib/auth'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export default auth((req) => {
+export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  // Only protect /admin routes except /admin/login
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    if (!req.auth) {
-      const loginUrl = new URL('/admin/login', req.url)
-      return NextResponse.redirect(loginUrl)
-    }
+  // Only run on /admin routes
+  if (!pathname.startsWith('/admin')) {
+    return NextResponse.next()
   }
 
-  // If logged in and trying to access login page, redirect to admin
-  if (pathname === '/admin/login' && req.auth) {
-    return NextResponse.redirect(new URL('/admin', req.url))
+  // Allow login page through always
+  if (pathname === '/admin/login') {
+    return NextResponse.next()
+  }
+
+  // Check for session token (NextAuth v5 uses this cookie name)
+  const token =
+    req.cookies.get('authjs.session-token') ||
+    req.cookies.get('__Secure-authjs.session-token') ||
+    req.cookies.get('next-auth.session-token') ||
+    req.cookies.get('__Secure-next-auth.session-token')
+
+  if (!token) {
+    const loginUrl = new URL('/admin/login', req.url)
+    return NextResponse.redirect(loginUrl)
   }
 
   return NextResponse.next()
-})
+}
 
 export const config = {
   matcher: ['/admin/:path*'],
