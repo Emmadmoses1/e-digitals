@@ -1,99 +1,54 @@
 import Link from 'next/link'
 
-const footerLinks = [
-  { href: '/work', label: 'Work' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
-  { href: '/process', label: 'Process' },
-  { href: '/contact', label: 'Contact' },
-]
-
-const legalLinks = [
-  { href: '/privacy', label: 'Privacy' },
-  { href: '/terms', label: 'Terms' },
-]
-
 export default function Footer() {
   const year = new Date().getFullYear()
-
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg)]">
-      <div className="container">
-        {/* Top */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer className="bg-[#0a0a0a] text-white">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
-          <div className="md:col-span-1">
-            <Link
-              href="/"
-              className="text-sm font-semibold tracking-[0.15em] uppercase text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors"
-            >
-              E-DIGITALS
-            </Link>
-            <p className="mt-3 text-xs text-[var(--color-text-muted)] tracking-wider uppercase">
-              Brand Identity Designer
-              <br />
-              Web Developer
-            </p>
-            <p className="mt-6 text-sm text-[var(--color-text-secondary)] max-w-xs leading-relaxed">
-              Creating distinctive brands and digital experiences for ambitious businesses.
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-8 h-8 bg-[#f97316] rounded-lg flex items-center justify-center">
+                <span className="text-white font-black text-sm">E</span>
+              </span>
+              <span className="font-bold tracking-tight">E-DIGITALS</span>
+            </div>
+            <p className="text-[#6b7280] text-sm leading-relaxed">
+              Brand identity & digital experiences that help businesses grow.
             </p>
           </div>
 
-          {/* Nav */}
+          {/* Links */}
           <div>
-            <p className="text-xs font-medium tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-5">
-              Navigation
-            </p>
-            <nav className="flex flex-col gap-3">
-              {footerLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-                >
-                  {link.label}
-                </Link>
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#6b7280] mb-4">Navigation</p>
+            <div className="flex flex-col gap-3">
+              {[['Work', '/work'], ['Services', '/services'], ['About', '/about'], ['Process', '/process'], ['Contact', '/contact']].map(([label, href]) => (
+                <Link key={href} href={href} className="text-sm text-[#9ca3af] hover:text-white transition-colors">{label}</Link>
               ))}
-            </nav>
+            </div>
           </div>
 
           {/* Contact */}
           <div>
-            <p className="text-xs font-medium tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-5">
-              Get In Touch
-            </p>
-            <a
-              href="mailto:hello@e-digitals.com"
-              className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
-            >
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#6b7280] mb-4">Get In Touch</p>
+            <a href="mailto:hello@e-digitals.com" className="text-sm text-[#f97316] hover:text-[#ea6c0a] transition-colors font-medium">
               hello@e-digitals.com
             </a>
-            <div className="mt-6">
-              <Link
-                href="/contact"
-                className="btn btn-outline text-xs tracking-wider uppercase"
-              >
-                Start a Project
-              </Link>
-            </div>
+            <p className="text-sm text-[#9ca3af] mt-4 leading-relaxed">
+              Available for freelance projects and collaborations.
+            </p>
+            <Link href="/contact" className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-white border border-white/20 px-4 py-2 rounded-full hover:border-[#f97316] hover:text-[#f97316] transition-all">
+              Start a project →
+            </Link>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="py-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[var(--color-text-muted)]">
-            © {year} E-DIGITALS. All rights reserved.
-          </p>
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[#6b7280]">© {year} E-DIGITALS. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            {legalLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            <Link href="/privacy" className="text-xs text-[#6b7280] hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="text-xs text-[#6b7280] hover:text-white transition-colors">Terms</Link>
           </div>
         </div>
       </div>

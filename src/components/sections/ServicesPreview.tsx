@@ -1,72 +1,59 @@
 import Link from 'next/link'
-import { ArrowRight, Palette, Monitor, Code, Globe } from 'lucide-react'
-import { Service } from '@/types'
+import { ArrowRight, Palette, Monitor, Code, Globe, Layers, Zap } from 'lucide-react'
 
 const iconMap: Record<string, React.ReactNode> = {
-  Palette: <Palette size={20} />,
-  Monitor: <Monitor size={20} />,
-  Code: <Code size={20} />,
-  Globe: <Globe size={20} />,
+  Palette: <Palette size={24} />,
+  Monitor: <Monitor size={24} />,
+  Code: <Code size={24} />,
+  Globe: <Globe size={24} />,
+  Layers: <Layers size={24} />,
+  Zap: <Zap size={24} />,
 }
 
-interface ServicesPreviewProps {
-  services: Service[]
+interface Service {
+  id: string
+  title: string
+  description?: string | null
+  icon?: string | null
 }
 
-export default function ServicesPreview({ services }: ServicesPreviewProps) {
+export default function ServicesPreview({ services }: { services: Service[] }) {
   return (
-    <section className="section border-t border-[var(--color-border)]">
-      <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Left */}
-          <div className="lg:col-span-4">
-            <span className="text-xs tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-              What I Do
-            </span>
-            <h2 className="text-heading-xl mt-2 mb-6">
-              Services
-            </h2>
-            <p className="text-body text-[var(--color-text-secondary)] mb-8">
-              From brand strategy to web development — I handle the full
-              creative and digital process.
-            </p>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-sm text-[var(--color-accent)] hover:gap-3 transition-all group"
-            >
-              All Services
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-            </Link>
+    <section className="section bg-white">
+      <div className="container-tight">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <span className="tag-accent mb-3 inline-block">What We Do</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#0a0a0a] tracking-tight">Our Services</h2>
           </div>
+          <Link href="/services" className="btn-ghost font-semibold text-[#0a0a0a]">
+            All services <ArrowRight size={16} />
+          </Link>
+        </div>
 
-          {/* Right */}
-          <div className="lg:col-span-8">
-            <div className="divide-y divide-[var(--color-border)]">
-              {services.map((service, i) => (
-                <div
-                  key={service.id}
-                  className="py-6 flex items-start gap-6 group hover:pl-2 transition-all duration-300"
-                >
-                  <div className="w-8 h-8 flex items-center justify-center text-[var(--color-accent)] shrink-0 mt-0.5">
-                    {service.icon && iconMap[service.icon]
-                      ? iconMap[service.icon]
-                      : <span className="text-sm font-medium">0{i + 1}</span>
-                    }
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-accent)] transition-colors">
-                      {service.title}
-                    </h3>
-                    {service.description && (
-                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                        {service.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {services.map((s, i) => (
+            <div key={s.id} className="card p-8 group hover:shadow-lg">
+              <div className="w-12 h-12 bg-[#f97316]/10 text-[#f97316] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#f97316] group-hover:text-white transition-all duration-300">
+                {iconMap[s.icon || ''] || <Zap size={24} />}
+              </div>
+              <h3 className="text-lg font-bold text-[#0a0a0a] mb-3">{s.title}</h3>
+              {s.description && (
+                <p className="text-[#6b7280] text-sm leading-relaxed">{s.description}</p>
+              )}
             </div>
+          ))}
+        </div>
+
+        {/* CTA strip */}
+        <div className="mt-12 bg-[#0a0a0a] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-2">Ready to start your project?</h3>
+            <p className="text-[#9ca3af] text-sm">Let&apos;s create something amazing together.</p>
           </div>
+          <Link href="/contact" className="btn-primary whitespace-nowrap">
+            Get in Touch <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>
