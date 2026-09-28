@@ -22,7 +22,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!parsed.success) return null
 
         const { email, password } = parsed.data
-
         const user = await prisma.user.findUnique({ where: { email } })
         if (!user) return null
 
@@ -55,7 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   pages: {
-    signIn: '/admin/login',
+    signIn: '/login',
   },
   session: {
     strategy: 'jwt',

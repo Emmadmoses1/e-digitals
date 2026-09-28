@@ -9,25 +9,7 @@ export default async function AdminLayout({
   children: React.ReactNode
 }) {
   const session = await auth()
-
-  // Get current path from headers
-  const { headers } = await import('next/headers')
-  const headersList = await headers()
-  const pathname = headersList.get('x-invoke-path') || ''
-
-  // Only protect non-login pages
-  if (!session && !pathname.includes('/admin/login')) {
-    redirect('/admin/login')
-  }
-
-  // If logged in and trying to access login, go to dashboard
-  if (session && pathname.includes('/admin/login')) {
-    redirect('/admin')
-  }
-
-  if (!session) {
-    return <>{children}</>
-  }
+  if (!session) redirect('/login')
 
   const user = {
     name: session.user?.name ?? null,
