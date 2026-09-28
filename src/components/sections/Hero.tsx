@@ -10,24 +10,24 @@ export default function Hero() {
           {/* Left — text */}
           <div className="flex flex-col justify-center py-16 lg:py-0">
             <p className="text-xs font-bold text-[#f97316] tracking-widest uppercase mb-6">
-              Hello, my name is
+              Welcome to
             </p>
             <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#0a0a0a] leading-none tracking-tight mb-2">
-              Emmanuel
+              E-DIGITALS
             </h1>
-            <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#0a0a0a] leading-none tracking-tight mb-8">
-              Moses
+            <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#f97316] leading-none tracking-tight mb-8">
+              STUDIO
             </h1>
             <p className="text-xs font-bold text-[#6b7280] tracking-widest uppercase mb-8">
-              I&apos;m a Brand Identity Designer &amp; Web Developer
+              Brand Identity Design &amp; Web Development
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Link href="/work" className="btn-primary">
-                View My Work <ArrowRight size={16} />
+                View Our Work <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-outline">
-                Hire Me
+                Hire Us
               </Link>
             </div>
 
@@ -51,13 +51,12 @@ export default function Hero() {
             <div className="absolute top-24 right-8 w-16 h-16 bg-[#f97316]" />
             <div className="absolute top-40 right-0 w-8 h-8 border-4 border-[#f97316]" />
 
-            {/* Placeholder box */}
             <div className="relative z-10 w-[380px] h-[520px] bg-[#f3f4f6] flex flex-col items-center justify-center border-2 border-dashed border-[#d1d5db]">
-              <div className="w-20 h-20 bg-[#e5e7eb] rounded-full flex items-center justify-center mb-4">
-                <User size={40} className="text-[#9ca3af]" />
+              <div className="w-24 h-24 bg-[#0a0a0a] rounded-full flex items-center justify-center mb-4">
+                <span className="text-[#f97316] font-black text-3xl">E</span>
               </div>
-              <p className="text-sm font-bold text-[#9ca3af]">Emmanuel Moses</p>
-              <p className="text-xs text-[#d1d5db] mt-1">Upload photo via Admin → Settings</p>
+              <p className="text-sm font-black text-[#0a0a0a]">E-DIGITALS STUDIO</p>
+              <p className="text-xs text-[#9ca3af] mt-1">Upload your photo via Admin</p>
               <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
             </div>
 
