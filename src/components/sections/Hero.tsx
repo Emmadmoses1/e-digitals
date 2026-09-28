@@ -49,27 +49,28 @@ export default function Hero() {
 
           {/* Right — photo */}
           <div className="relative hidden lg:flex items-end justify-center h-full min-h-[calc(100vh-64px)]">
-            {/* Orange background block behind photo */}
+            {/* Background block */}
             <div className="absolute bottom-0 right-0 w-4/5 h-[90%] bg-[#f97316]/10" />
 
-            {/* Orange accent squares */}
+            {/* Orange accents */}
             <div className="absolute top-24 right-8 w-16 h-16 bg-[#f97316]" />
             <div className="absolute top-40 right-0 w-8 h-8 border-4 border-[#f97316]" />
 
-            {/* Photo — flush to bottom */}
+            {/* Photo */}
             <div className="relative z-10 w-[380px] h-[520px]">
               <Image
-                src="/images/emmanuel.jpg"
+                src="https://i.ibb.co/LdPTcdx7/Gemini-Generated-Image-dfkwp0dfkwp0dfkw-2.jpg"
                 alt="Emmanuel Moses"
                 fill
                 className="object-cover object-top"
                 priority
+                unoptimized
               />
-              {/* Gradient fade at bottom */}
+              {/* Fade bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
             </div>
 
-            {/* Floating card */}
+            {/* Floating cards */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-xl border border-[#f3f4f6] p-5 w-44 z-20">
               <p className="text-xs text-[#9ca3af] font-medium uppercase tracking-wide mb-1">Client Rating</p>
               <p className="text-2xl font-black text-[#0a0a0a]">5.0 <span className="text-[#f97316]">★</span></p>
