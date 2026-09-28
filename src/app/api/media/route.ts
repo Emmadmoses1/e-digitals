@@ -16,7 +16,9 @@ export async function POST(req: NextRequest) {
     const session = await auth()
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const body = await req.json()
-    const data = await prisma.media.create({ data: { filename: body.filename, url: body.url, alt: body.alt } })
+    const data = await prisma.media.create({
+      data: { filename: body.filename, url: body.url }
+    })
     return NextResponse.json(data, { status: 201 })
   } catch {
     return NextResponse.json({ error: 'Failed' }, { status: 500 })

@@ -7,8 +7,8 @@ const schema = z.object({
   name: z.string().min(1),
   role: z.string().optional(),
   company: z.string().optional(),
-  content: z.string().min(1),
-  rating: z.number().min(1).max(5).optional(),
+  avatar: z.string().optional(),
+  message: z.string().min(1),
   published: z.boolean().optional(),
 })
 

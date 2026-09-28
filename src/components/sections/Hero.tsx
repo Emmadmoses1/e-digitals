@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import Image from 'next/image'
+import { ArrowRight, User } from 'lucide-react'
 
 export default function Hero() {
   return (
@@ -32,7 +31,6 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-[#f3f4f6]">
               {[
                 { number: '120+', label: 'Projects Done' },
@@ -47,30 +45,22 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — photo */}
+          {/* Right — photo placeholder */}
           <div className="relative hidden lg:flex items-end justify-center h-full min-h-[calc(100vh-64px)]">
-            {/* Background block */}
             <div className="absolute bottom-0 right-0 w-4/5 h-[90%] bg-[#f97316]/10" />
-
-            {/* Orange accents */}
             <div className="absolute top-24 right-8 w-16 h-16 bg-[#f97316]" />
             <div className="absolute top-40 right-0 w-8 h-8 border-4 border-[#f97316]" />
 
-            {/* Photo */}
-            <div className="relative z-10 w-[380px] h-[520px]">
-              <Image
-                src="https://i.ibb.co/LdPTcdx7/Gemini-Generated-Image-dfkwp0dfkwp0dfkw-2.jpg"
-                alt="Emmanuel Moses"
-                fill
-                className="object-cover object-top"
-                priority
-                unoptimized
-              />
-              {/* Fade bottom */}
+            {/* Placeholder box */}
+            <div className="relative z-10 w-[380px] h-[520px] bg-[#f3f4f6] flex flex-col items-center justify-center border-2 border-dashed border-[#d1d5db]">
+              <div className="w-20 h-20 bg-[#e5e7eb] rounded-full flex items-center justify-center mb-4">
+                <User size={40} className="text-[#9ca3af]" />
+              </div>
+              <p className="text-sm font-bold text-[#9ca3af]">Emmanuel Moses</p>
+              <p className="text-xs text-[#d1d5db] mt-1">Upload photo via Admin → Settings</p>
               <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
             </div>
 
-            {/* Floating cards */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-xl border border-[#f3f4f6] p-5 w-44 z-20">
               <p className="text-xs text-[#9ca3af] font-medium uppercase tracking-wide mb-1">Client Rating</p>
               <p className="text-2xl font-black text-[#0a0a0a]">5.0 <span className="text-[#f97316]">★</span></p>

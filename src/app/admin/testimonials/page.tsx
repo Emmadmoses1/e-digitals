@@ -8,8 +8,8 @@ interface Testimonial {
   name: string
   role?: string | null
   company?: string | null
-  content: string
-  rating: number
+  avatar?: string | null
+  message: string
   published: boolean
 }
 
@@ -17,7 +17,7 @@ export default function AdminTestimonialsPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState<string | null>(null)
-  const [form, setForm] = useState({ name: '', role: '', company: '', content: '', rating: 5 })
+  const [form, setForm] = useState({ name: '', role: '', company: '', message: '' })
 
   const load = async () => {
     const res = await fetch('/api/testimonials')
@@ -28,13 +28,13 @@ export default function AdminTestimonialsPage() {
   useEffect(() => { load() }, [])
 
   const create = async () => {
-    if (!form.name || !form.content) return
+    if (!form.name || !form.message) return
     await fetch('/api/testimonials', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, published: true }),
     })
-    setForm({ name: '', role: '', company: '', content: '', rating: 5 })
+    setForm({ name: '', role: '', company: '', message: '' })
     load()
   }
 
@@ -62,7 +62,6 @@ export default function AdminTestimonialsPage() {
         <p className="text-sm text-gray-500 mt-1">Manage client testimonials</p>
       </div>
 
-      {/* Add new */}
       <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
         <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4">Add Testimonial</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
@@ -74,33 +73,26 @@ export default function AdminTestimonialsPage() {
             <label className="label">Role</label>
             <input value={form.role} onChange={e => setForm(p => ({ ...p, role: e.target.value }))} className="input" placeholder="CEO" />
           </div>
-          <div>
+          <div className="md:col-span-2">
             <label className="label">Company</label>
             <input value={form.company} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} className="input" placeholder="Company name" />
           </div>
-          <div>
-            <label className="label">Rating</label>
-            <select value={form.rating} onChange={e => setForm(p => ({ ...p, rating: Number(e.target.value) }))} className="input">
-              {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} Stars</option>)}
-            </select>
-          </div>
         </div>
         <div className="mb-4">
-          <label className="label">Testimonial *</label>
-          <textarea value={form.content} onChange={e => setForm(p => ({ ...p, content: e.target.value }))} className="input min-h-[100px] resize-y" placeholder="What the client said..." />
+          <label className="label">Message *</label>
+          <textarea value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} className="input min-h-[100px] resize-y" placeholder="What the client said..." />
         </div>
         <button onClick={create} className="btn-primary text-xs py-2.5">
           <Plus size={14} /> Add Testimonial
         </button>
       </div>
 
-      {/* List */}
       {loading ? (
         <p className="text-sm text-gray-500">Loading...</p>
       ) : testimonials.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
           <Star size={40} className="mx-auto mb-3 opacity-30" />
-          <p className="text-sm">No testimonials yet. Add your first one above.</p>
+          <p className="text-sm">No testimonials yet.</p>
         </div>
       ) : (
         <div className="flex flex-col gap-4">
@@ -124,18 +116,13 @@ function TestimonialRow({ testimonial, saving, onSave, onDelete }: {
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-      <div className="flex items-center gap-1 mb-4">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} size={14} className={i < form.rating ? 'text-[#f97316] fill-[#f97316]' : 'text-gray-300'} />
-        ))}
-      </div>
-      <textarea value={form.content} onChange={e => setForm(p => ({ ...p, content: e.target.value }))}
-        className="input min-h-[80px] resize-y mb-3" />
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
         <input value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="input" placeholder="Name" />
         <input value={form.role || ''} onChange={e => setForm(p => ({ ...p, role: e.target.value }))} className="input" placeholder="Role" />
         <input value={form.company || ''} onChange={e => setForm(p => ({ ...p, company: e.target.value }))} className="input" placeholder="Company" />
       </div>
+      <textarea value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
+        className="input min-h-[80px] resize-y mb-4" />
       <div className="flex items-center gap-3">
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
           <input type="checkbox" checked={form.published} onChange={e => setForm(p => ({ ...p, published: e.target.checked }))}
