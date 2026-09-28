@@ -1,13 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import ProjectCard from '@/components/ui/ProjectCard'
-import PageTransition from '@/components/animations/PageTransition'
-import FadeUp from '@/components/animations/FadeUp'
-import { Project } from '@/types'
 
-export const metadata = {
-  title: 'Work',
-  description: 'Selected projects in brand identity, web design and web development.',
-}
+export const dynamic = 'force-dynamic'
+export const metadata = { title: 'Work' }
 
 export default async function WorkPage() {
   const projects = await prisma.project.findMany({
@@ -16,42 +11,20 @@ export default async function WorkPage() {
   }).catch(() => [])
 
   return (
-    <PageTransition>
-      <section className="pt-40 pb-20">
-        <div className="container">
-          {/* Header */}
-          <FadeUp>
-            <span className="text-xs tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-              Portfolio
-            </span>
-            <h1 className="text-heading-xl mt-2 mb-4">Selected Work</h1>
-            <p className="text-body text-[var(--color-text-secondary)] max-w-xl mb-16">
-              A collection of brand identity and web development projects
-              for businesses and startups.
-            </p>
-          </FadeUp>
-
-          {/* Projects */}
-          {projects.length === 0 ? (
-            <div className="py-32 text-center border border-[var(--color-border)] rounded-lg">
-              <p className="text-[var(--color-text-muted)] text-sm">
-                Selected work is coming together.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {projects.map((project, i) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project as unknown as Project}
-                  index={i}
-                  large={i === 0}
-                />
-              ))}
-            </div>
-          )}
+    <div className="min-h-screen bg-white pt-24 pb-16">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24">
+        <div className="mb-12">
+          <p className="text-xs font-bold text-[#f97316] uppercase tracking-widest mb-3">Portfolio</p>
+          <h1 className="text-5xl font-black text-[#0a0a0a]">Our Work</h1>
         </div>
-      </section>
-    </PageTransition>
+        {projects.length === 0 ? (
+          <p className="text-[#9ca3af]">No projects published yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map(p => <ProjectCard key={p.id} project={p} />)}
+          </div>
+        )}
+      </div>
+    </div>
   )
 }

@@ -1,34 +1,20 @@
-import PageTransition from '@/components/animations/PageTransition'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = { title: 'Privacy Policy' }
+export const metadata = { title: 'Privacy Policy' }
 
 export default function PrivacyPage() {
   return (
-    <PageTransition>
-      <section className="pt-40 pb-20">
-        <div className="container max-w-3xl">
-          <h1 className="text-heading-xl mb-10">Privacy Policy</h1>
-          <div className="flex flex-col gap-8 text-body text-[var(--color-text-secondary)]">
-            <div>
-              <h2 className="text-heading-md text-[var(--color-text-primary)] mb-3">Information I Collect</h2>
-              <p>When you submit the contact form, I collect your name, email address, company name and project details. This information is used solely to respond to your enquiry.</p>
-            </div>
-            <div>
-              <h2 className="text-heading-md text-[var(--color-text-primary)] mb-3">How I Use Your Information</h2>
-              <p>Your information is used only to communicate with you about your project enquiry. I do not sell, share or distribute your personal information to third parties.</p>
-            </div>
-            <div>
-              <h2 className="text-heading-md text-[var(--color-text-primary)] mb-3">Data Storage</h2>
-              <p>Contact form submissions are stored securely in my database. You may request deletion of your data at any time by emailing hello@e-digitals.com.</p>
-            </div>
-            <div>
-              <h2 className="text-heading-md text-[var(--color-text-primary)] mb-3">Contact</h2>
-              <p>For any privacy-related questions, contact me at hello@e-digitals.com.</p>
-            </div>
-          </div>
+    <div className="min-h-screen bg-white pt-24 pb-16">
+      <div className="max-w-3xl mx-auto px-6 md:px-12">
+        <h1 className="text-4xl font-black text-[#0a0a0a] mb-8">Privacy Policy</h1>
+        <div className="prose prose-sm text-[#6b7280] space-y-6">
+          <p>E-DIGITALS STUDIO respects your privacy. This policy outlines how we collect and use information when you visit our website.</p>
+          <h2 className="text-lg font-black text-[#0a0a0a]">Information We Collect</h2>
+          <p>We collect information you provide directly, such as when you contact us through our contact form (name, email, message).</p>
+          <h2 className="text-lg font-black text-[#0a0a0a]">How We Use Information</h2>
+          <p>We use the information to respond to your inquiries and improve our services. We do not sell or share your data with third parties.</p>
+          <h2 className="text-lg font-black text-[#0a0a0a]">Contact</h2>
+          <p>For privacy concerns, contact us through our contact page.</p>
         </div>
-      </section>
-    </PageTransition>
+      </div>
+    </div>
   )
 }
